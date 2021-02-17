@@ -32,12 +32,17 @@ while True:
 
         eyes = eye_cascade.detectMultiScale(roi_gray)
         for (ex,ey,ew,eh) in eyes:
-
-            frame = cv2.rectangle(frame, (x, y), (x+w+3, y+h+3), (255, 0, 0), 2)
+            #frame = cv2.rectangle(frame, (x, y), (x+w+3, y+h+3), (255, 0, 0), 2)
 
             if int(now - later) > 3 :
                 later = now
                 print(x, y)
+
+                filename = "output/face-" + str(now) + ".png"
+                crop_img = frame[y:y+h+100, x:x+w+5]
+                cv2.imwrite(filename, crop_img)
+
+            frame = cv2.rectangle(frame, (x, y), (x+w+5, y+h+100), (255, 0, 0), 2)
 
     # Show image
     cv2.imshow('frame', frame)
