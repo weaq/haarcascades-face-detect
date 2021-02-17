@@ -32,7 +32,6 @@ while True:
 
         eyes = eye_cascade.detectMultiScale(roi_gray)
         for (ex,ey,ew,eh) in eyes:
-            #frame = cv2.rectangle(frame, (x, y), (x+w+3, y+h+3), (255, 0, 0), 2)
 
             if int(now - later) > 3 :
                 later = now
