@@ -1,10 +1,14 @@
 import cv2
 
 # Load cascade
+# Multiple cascades: https://github.com/Itseez/opencv/tree/master/data/haarcascades
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-# capture video from webcam.
+# Capture video from webcam.
 cap = cv2.VideoCapture(0)
+cap.set(3,640) # set Width
+cap.set(4,480) # set Height
+
 
 while True:
     # Capture frame by frame
@@ -18,7 +22,12 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Detect faces
-    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+    faces = face_cascade.detectMultiScale(
+            gray,
+            scaleFactor=1.2,
+            minNeighbors=5,
+            minSize=(20, 20)
+            )
 
     # Draw rectangle around face
     for (x, y, w, h) in faces:
